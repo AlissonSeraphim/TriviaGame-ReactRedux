@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export class Login extends React.Component {
+import { fetchToken } from '../redux/actions';
+
+class Login extends React.Component {
   state = {
     emailInput: '',
     userInput: '',
@@ -29,11 +33,20 @@ export class Login extends React.Component {
     && userInput.length > 0);
   };
 
+  tokenRequest = async () => {
+    const { history, dispatch } = this.props;
+    await dispatch(fetchToken());
+
+    history.push('/game');
+  };
+
   render() {
     const {
       emailInput,
       userInput,
     } = this.state;
+
+    // const { dispatch } = this.props;
 
     return (
       <div>
@@ -69,9 +82,7 @@ export class Login extends React.Component {
               name="submitButton"
               data-testid="btn-play"
               disabled={ this.verifyEntries() }
-              onClick={ () => {
-                // history.push('/carteira');
-              } }
+              onClick={ this.tokenRequest }
 
             >
               Play
@@ -82,3 +93,15 @@ export class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+// const mapStateToProps = (state) => ({
+//   name: state.player.name,
+// });
+export default connect()(Login);
