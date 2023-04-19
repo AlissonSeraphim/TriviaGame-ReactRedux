@@ -14,11 +14,9 @@ export function fetchToken() {
   const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
   return async () => {
     const response = await fetch(BASE_URL);
-    const data = await response.json();
-    console.log(data);
-    const { token } = data;
-
-    if (token) {
+    if (response) {
+      const data = await response.json();
+      const { token } = data;
       console.log(token);
       localStorage.setItem('token', token);
     }
