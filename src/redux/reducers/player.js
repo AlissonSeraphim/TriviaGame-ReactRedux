@@ -7,7 +7,6 @@ const INITIAL_STATE = {
   assertions: '',
   score: 0,
   gravatarEmail: '',
-  tokenTest: '',
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -15,7 +14,6 @@ const player = (state = INITIAL_STATE, action) => {
   case GET_TOKEN:
     return {
       ...state,
-      tokenTest: action.payload,
     };
 
   default:

@@ -10,8 +10,9 @@ export const tokenAction = (token) => ({
 
 // Thunk Creators
 export function fetchToken() {
+  console.log('fui chamado ?!');
   const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
-  return async (dispatch) => {
+  return async () => {
     const response = await fetch(BASE_URL);
     const data = await response.json();
     console.log(data);
@@ -19,10 +20,7 @@ export function fetchToken() {
 
     if (token) {
       console.log(token);
-      const tokenLocalStorage = JSON.stringify(token);
-      localStorage.setItem('token', tokenLocalStorage);
+      localStorage.setItem('token', token);
     }
-
-    dispatch(tokenAction(token));
   };
 }

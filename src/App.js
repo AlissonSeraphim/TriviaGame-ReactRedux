@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom';
-import { Login } from './pages/Login';
+import Login from './pages/Login';
 
 class App extends React.Component {
   render() {
