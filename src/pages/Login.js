@@ -45,7 +45,7 @@ class Login extends React.Component {
       emailInput,
       userInput,
     } = this.state;
-
+    const { history } = this.props;
     // const { dispatch } = this.props;
 
     return (
@@ -86,6 +86,14 @@ class Login extends React.Component {
 
             >
               Play
+            </button>
+            <button
+              data-testid="btn-settings"
+              onClick={ () => {
+                history.push('/settings');
+              } }
+            >
+              Settings
             </button>
           </div>
         </form>
