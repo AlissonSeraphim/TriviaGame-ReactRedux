@@ -11,16 +11,20 @@ class Game extends React.Component {
     const { history } = this.props;
     const { token } = this.state;
     const getToken = localStorage.getItem('token');
-    const parseToken = JSON.parse(getToken);
+    // const parseToken = JSON.parse(getToken);
     this.setState({
-      token: { parseToken },
+      token: { getToken },
     });
-    const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
-    const data = await response.json();
-    const expiredError = 3;
-    if (data.response_code === expiredError) {
-      localStorage.removeItem(token);
-      history.push('/');
+    try {
+      const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+      const data = await response.json();
+      const expiredError = 3;
+      if (data.response_code === expiredError) {
+        localStorage.removeItem(token);
+        history.push('/');
+      }
+    } catch (error) {
+      console.log('There was an error', error);
     }
     // console.log(data);
   }
