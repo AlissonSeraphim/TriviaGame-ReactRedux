@@ -13,6 +13,7 @@ class Game extends React.Component {
     allAnswers: [],
     timeout: false,
     timer: 0,
+    needNext: false,
   };
 
   componentDidMount() {
@@ -66,7 +67,6 @@ class Game extends React.Component {
     const questions = results.map((element) => element.question);
     this.setState({ question: questions[contador] });
     const incorrect = results.map((element) => element.incorrect_answers);
-    // this.setState({ wrongAnswer: incorrect[contador] });
     const right = results.map((element) => element.correct_answer);
     this.setState({ rightAnswer: right[contador] });
     const allAnswers = [];
@@ -85,8 +85,20 @@ class Game extends React.Component {
       allAnswers: array });
   };
 
+  includesNext = () => {
+    this.setState({ needNext: true });
+  };
+
   render() {
-    const { rightAnswer, categories, allAnswers, question, timeout, timer } = this.state;
+    const {
+      rightAnswer,
+      categories,
+      allAnswers,
+      question,
+      needNext,
+      timeout,
+      timer,
+    } = this.state;
     return (
       <div>
         <Header />
@@ -108,6 +120,7 @@ class Game extends React.Component {
                 onClick={ () => {
                   this.questions();
                   this.setTimerQuestion();
+                  this.includesNext();
                 } }
                 disabled={ timeout }
               >
@@ -120,11 +133,21 @@ class Game extends React.Component {
                 onClick={ () => {
                   this.questions();
                   this.setTimerQuestion();
+                  this.includesNext();
                 } }
                 disabled={ timeout }
               >
                 {e}
               </button>)))}
+          { needNext
+          && (
+            <button
+              data-testid="btn-next"
+              onClick={ this.questions }
+            >
+              Next Button
+            </button>
+          )}
         </div>
       </div>
     );
