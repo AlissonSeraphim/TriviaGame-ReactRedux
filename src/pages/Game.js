@@ -111,7 +111,6 @@ class Game extends React.Component {
       allAnswers,
       question,
       needNext,
-      contador,
       timeout,
       timer,
     } = this.state;
