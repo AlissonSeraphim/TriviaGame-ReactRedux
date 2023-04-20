@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchToken } from '../redux/actions';
+import Loading from '../components/Loading';
 
 class Login extends React.Component {
   state = {
     emailInput: '',
     userInput: '',
+    isFetching: false,
   };
 
   handleSubmit = (event) => {
@@ -33,17 +34,30 @@ class Login extends React.Component {
     && userInput.length > 0);
   };
 
-  tokenRequest = async () => {
-    const { history, dispatch } = this.props;
-    await dispatch(fetchToken());
+  fetchToken = async () => {
+    this.setState({ isFetching: true });
+    console.log('fui chamado fetchToken ?!');
+    const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
 
-    history.push('/game');
+    try {
+      const response = await fetch(BASE_URL);
+      const data = await response.json();
+
+      console.log(data.token);
+
+      localStorage.setItem('token', data.token);
+    } catch (error) {
+      console.log('There was an error', error);
+    }
+
+    this.setState({ isFetching: false });
   };
 
   render() {
     const {
       emailInput,
       userInput,
+      isFetching,
     } = this.state;
     const { history } = this.props;
     // const { dispatch } = this.props;
@@ -82,7 +96,10 @@ class Login extends React.Component {
               name="submitButton"
               data-testid="btn-play"
               disabled={ this.verifyEntries() }
-              onClick={ this.tokenRequest }
+              onClick={ () => {
+                this.fetchToken();
+                history.push('/game');
+              } }
 
             >
               Play
@@ -95,6 +112,7 @@ class Login extends React.Component {
             >
               Settings
             </button>
+            { isFetching && <Loading /> }
           </div>
         </form>
       </div>
@@ -103,7 +121,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
