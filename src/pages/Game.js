@@ -89,6 +89,21 @@ class Game extends React.Component {
     this.setState({ needNext: true });
   };
 
+  verifyNumberQuestions = () => {
+    const { contador } = this.state;
+    const { history } = this.props;
+
+    const maxQuestionsAnswer = 5;
+
+    if (contador < maxQuestionsAnswer) {
+      this.questions();
+    }
+
+    if (contador === maxQuestionsAnswer) {
+      history.push('/feedback');
+    }
+  };
+
   render() {
     const {
       rightAnswer,
@@ -96,9 +111,13 @@ class Game extends React.Component {
       allAnswers,
       question,
       needNext,
+      contador,
       timeout,
       timer,
     } = this.state;
+
+    // const { history } = this.props;
+
     return (
       <div>
         <Header />
@@ -139,11 +158,13 @@ class Game extends React.Component {
               >
                 {e}
               </button>)))}
-          { needNext
+          { (needNext)
           && (
             <button
               data-testid="btn-next"
-              onClick={ this.questions }
+              onClick={ () => {
+                this.verifyNumberQuestions();
+              } }
             >
               Next Button
             </button>
