@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export class Feedback extends React.Component {
   render() {
     return (
-      <h1>feedback page</h1>
+      <div>
+        <h1>feedback page</h1>
+        <Header />
+      </div>
     );
   }
 }
