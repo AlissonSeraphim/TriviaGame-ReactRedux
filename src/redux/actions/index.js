@@ -1,9 +1,12 @@
 // Types
 
-export const GET_TOKEN = 'GET_TOKEN';
+export const USER_REQUEST = 'GET_USER';
 
 // Creators
-export const tokenAction = (token) => ({
-  type: GET_TOKEN,
-  payload: token,
+export const userInfo = (email, userName) => ({
+  type: USER_REQUEST,
+  payload: {
+    name: userName,
+    gravatarEmail: email,
+  },
 });

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Loading from '../components/Loading';
+import { userInfo } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -13,6 +14,13 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+  };
+
+  callUserAction = () => {
+    const { emailInput, userInput } = this.state;
+    const { dispatch } = this.props;
+
+    dispatch(userInfo(emailInput, userInput));
   };
 
   onInputChange = ({ target }) => {
@@ -36,6 +44,7 @@ class Login extends React.Component {
 
   fetchToken = async () => {
     this.setState({ isFetching: true });
+    const { history } = this.props;
     console.log('fui chamado fetchToken ?!');
     const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
 
@@ -46,6 +55,8 @@ class Login extends React.Component {
       console.log(data.token);
 
       localStorage.setItem('token', data.token);
+      console.log('a');
+      history.push('/game');
     } catch (error) {
       console.log('There was an error', error);
     }
@@ -98,7 +109,7 @@ class Login extends React.Component {
               disabled={ this.verifyEntries() }
               onClick={ () => {
                 this.fetchToken();
-                history.push('/game');
+                this.callUserAction();
               } }
 
             >
@@ -121,7 +132,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
