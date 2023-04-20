@@ -11,12 +11,29 @@ class Game extends React.Component {
     question: '',
     rightAnswer: '',
     allAnswers: [],
+    timeout: false,
+    timer: 0,
     needNext: false,
   };
 
   componentDidMount() {
     this.checkExpired();
   }
+
+  setTimer = () => {
+    const timeToAnswer = 30000;
+    this.setState({
+      timer: setTimeout(() => {
+        this.setState({ timeout: true });
+      }, timeToAnswer),
+    });
+  };
+
+  setTimerQuestion = () => {
+    const { timer } = this.state;
+    clearTimeout(timer);
+    this.setTimer();
+  };
 
   checkExpired = async () => {
     const { history } = this.props;
@@ -32,7 +49,7 @@ class Game extends React.Component {
       }
       this.setState({
         results: data.results,
-      }, () => this.questions());
+      }, () => this.questions(), this.setTimer());
     } catch (error) {
       console.log('There was an error', error);
     }
@@ -52,10 +69,10 @@ class Game extends React.Component {
     const incorrect = results.map((element) => element.incorrect_answers);
     const right = results.map((element) => element.correct_answer);
     this.setState({ rightAnswer: right[contador] });
-    const allAnswerss = [];
-    allAnswerss.push(...incorrect[contador]);
-    allAnswerss.push(right[contador]);
-    this.shuffle(allAnswerss);
+    const allAnswers = [];
+    allAnswers.push(...incorrect[contador]);
+    allAnswers.push(right[contador]);
+    this.shuffle(allAnswers);
     this.refreshCounter();
   };
 
@@ -79,11 +96,16 @@ class Game extends React.Component {
       allAnswers,
       question,
       needNext,
+      timeout,
+      timer,
     } = this.state;
-
     return (
       <div>
         <Header />
+        <div>
+          Countdown:
+          {timer}
+        </div>
         <span data-testid="question-category">{categories}</span>
 
         <div>
@@ -97,8 +119,10 @@ class Game extends React.Component {
                 key={ index }
                 onClick={ () => {
                   this.questions();
+                  this.setTimerQuestion();
                   this.includesNext();
                 } }
+                disabled={ timeout }
               >
                 {e}
               </button>)
@@ -108,8 +132,10 @@ class Game extends React.Component {
                 key={ index }
                 onClick={ () => {
                   this.questions();
+                  this.setTimerQuestion();
                   this.includesNext();
                 } }
+                disabled={ timeout }
               >
                 {e}
               </button>)))}
