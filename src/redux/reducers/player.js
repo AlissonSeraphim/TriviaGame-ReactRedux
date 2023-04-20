@@ -1,5 +1,5 @@
 // actions;
-import { GET_TOKEN } from '../actions';
+import { USER_REQUEST } from '../actions';
 
 // reducers
 const INITIAL_STATE = {
@@ -11,9 +11,11 @@ const INITIAL_STATE = {
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case GET_TOKEN:
+  case USER_REQUEST:
     return {
       ...state,
+      name: action.payload.name,
+      gravatarEmail: action.payload.gravatarEmail,
     };
 
   default:
