@@ -11,6 +11,7 @@ class Game extends React.Component {
     question: '',
     rightAnswer: '',
     allAnswers: [],
+    needNext: false,
   };
 
   componentDidMount() {
@@ -49,7 +50,6 @@ class Game extends React.Component {
     const questions = results.map((element) => element.question);
     this.setState({ question: questions[contador] });
     const incorrect = results.map((element) => element.incorrect_answers);
-    // this.setState({ wrongAnswer: incorrect[contador] });
     const right = results.map((element) => element.correct_answer);
     this.setState({ rightAnswer: right[contador] });
     const allAnswerss = [];
@@ -68,8 +68,19 @@ class Game extends React.Component {
       allAnswers: array });
   };
 
+  includesNext = () => {
+    this.setState({ needNext: true });
+  };
+
   render() {
-    const { rightAnswer, categories, allAnswers, question } = this.state;
+    const {
+      rightAnswer,
+      categories,
+      allAnswers,
+      question,
+      needNext,
+    } = this.state;
+
     return (
       <div>
         <Header />
@@ -86,6 +97,7 @@ class Game extends React.Component {
                 key={ index }
                 onClick={ () => {
                   this.questions();
+                  this.includesNext();
                 } }
               >
                 {e}
@@ -96,10 +108,20 @@ class Game extends React.Component {
                 key={ index }
                 onClick={ () => {
                   this.questions();
+                  this.includesNext();
                 } }
               >
                 {e}
               </button>)))}
+          { needNext
+          && (
+            <button
+              data-testid="btn-next"
+              onClick={ this.questions }
+            >
+              Next Button
+            </button>
+          )}
         </div>
       </div>
     );
