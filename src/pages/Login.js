@@ -35,7 +35,6 @@ class Login extends React.Component {
   };
 
   fetchToken = async () => {
-    const { history } = this.props;
     this.setState({ isFetching: true });
     console.log('fui chamado fetchToken ?!');
     const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
@@ -52,8 +51,6 @@ class Login extends React.Component {
     }
 
     this.setState({ isFetching: false });
-
-    history.push('/game');
   };
 
   render() {
@@ -101,6 +98,7 @@ class Login extends React.Component {
               disabled={ this.verifyEntries() }
               onClick={ () => {
                 this.fetchToken();
+                history.push('/game');
               } }
 
             >

@@ -51,7 +51,7 @@ describe('teste da página login', () => {
 
     userEvent.type(inputName, nameTest);
     userEvent.type(inputEmail, emailTest);
-    act(() => { userEvent.click( btnPlay)});
+    act(() => { userEvent.click(btnPlay)});
     const { location: { pathname } } = history
     console.log(pathname);
     expect(pathname).toBe("/game")
