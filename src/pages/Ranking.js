@@ -11,18 +11,6 @@ export class Ranking extends React.Component {
         </h1>
         <div>
           <button
-            data-testid="btn-play-again"
-            onClick={ () => history.push('/') }
-          >
-            Play Again
-          </button>
-          <button
-            data-testid="btn-ranking"
-            onClick={ () => history.push('/ranking') }
-          >
-            Ranking
-          </button>
-          <button
             data-testid="btn-go-home"
             onClick={ () => history.push('/') }
           >
