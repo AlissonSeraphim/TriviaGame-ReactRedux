@@ -9,12 +9,26 @@ export class Ranking extends React.Component {
         <h1 data-testid="ranking-title">
           Ranking
         </h1>
-        <button
-          data-testid="btn-go-home"
-          onClick={ () => history.push('/') }
-        >
-          Tela Inicial
-        </button>
+        <div>
+          <button
+            data-testid="btn-play-again"
+            onClick={ () => history.push('/') }
+          >
+            Play Again
+          </button>
+          <button
+            data-testid="btn-ranking"
+            onClick={ () => history.push('/ranking') }
+          >
+            Ranking
+          </button>
+          <button
+            data-testid="btn-go-home"
+            onClick={ () => history.push('/') }
+          >
+            Tela Inicial
+          </button>
+        </div>
       </div>
     );
   }
