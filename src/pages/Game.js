@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { scoreSum } from '../redux/actions';
 
 class Game extends React.Component {
   state = {
@@ -12,8 +14,8 @@ class Game extends React.Component {
     rightAnswer: '',
     allAnswers: [],
     timeout: false,
-    timer: 0,
     needNext: false,
+    seconds: 30,
   };
 
   componentDidMount() {
@@ -21,18 +23,28 @@ class Game extends React.Component {
   }
 
   setTimer = () => {
-    const timeToAnswer = 30000;
-    this.setState({
-      timer: setTimeout(() => {
+    const timeout = 1000;
+    const timer = setInterval(() => {
+      const { seconds } = this.state;
+      if (seconds > 0) {
+        this.setState({ seconds: seconds - 1 });
+      }
+      if (seconds === 0) {
+        console.log('h');
+        clearInterval(timer);
         this.setState({ timeout: true });
-      }, timeToAnswer),
-    });
+      }
+    }, timeout);
   };
 
   setTimerQuestion = () => {
-    const { timer } = this.state;
-    clearTimeout(timer);
-    this.setTimer();
+    const { seconds } = this.state;
+
+    if (seconds > 0) { this.setState({ seconds: 30 }); }
+
+    if (seconds === 0) {
+      this.setState({ seconds: 30, timeout: false }, this.setTimer());
+    }
   };
 
   checkExpired = async () => {
@@ -104,6 +116,25 @@ class Game extends React.Component {
     }
   };
 
+  answerClick = () => {
+    const { contador, seconds, results } = this.state;
+    const { dispatch } = this.props;
+    const calculateScore = (difficulty, secondsLeft) => {
+      const levels = {
+        easy: 1,
+        medium: 2,
+        hard: 3,
+      };
+      const correctAnswer = 10;
+      console.log(secondsLeft);
+      return (
+        correctAnswer + (levels[difficulty] * (secondsLeft))
+      );
+    };
+    const TOTAL = calculateScore(results[contador].difficulty, seconds);
+    dispatch(scoreSum(TOTAL));
+  };
+
   render() {
     const {
       rightAnswer,
@@ -112,20 +143,23 @@ class Game extends React.Component {
       question,
       needNext,
       timeout,
-      timer,
+      seconds,
     } = this.state;
 
     const { history } = this.props;
+
+    console.log(rightAnswer);
+    console.log(question);
 
     return (
       <div>
         <Header />
         <div>
           Countdown:
-          {timer}
+          {seconds}
+
         </div>
         <span data-testid="question-category">{categories}</span>
-
         <div>
           <span data-testid="question-text">{ question }</span>
         </div>
@@ -139,6 +173,7 @@ class Game extends React.Component {
                   this.questions();
                   this.setTimerQuestion();
                   this.includesNext();
+                  this.answerClick();
                 } }
                 disabled={ timeout }
               >
@@ -163,6 +198,7 @@ class Game extends React.Component {
               data-testid="btn-next"
               onClick={ () => {
                 this.verifyNumberQuestions();
+                this.setTimerQuestion();
               } }
             >
               Next Button
@@ -173,6 +209,12 @@ class Game extends React.Component {
             onClick={ () => history.push('/') }
           >
             Play Again
+          </button>
+          <button
+            data-testid="btn-ranking"
+            onClick={ () => history.push('/ranking') }
+          >
+            Ranking
           </button>
         </div>
       </div>
@@ -186,4 +228,4 @@ Game.propTypes = {
   }),
 }.isRequired;
 
-export default Game;
+export default connect()(Game);
