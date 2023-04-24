@@ -1,5 +1,5 @@
 // actions;
-import { USER_REQUEST } from '../actions';
+import { USER_REQUEST, SCORE_SUM } from '../actions';
 
 // reducers
 const INITIAL_STATE = {
@@ -17,7 +17,11 @@ const player = (state = INITIAL_STATE, action) => {
       name: action.payload.name,
       gravatarEmail: action.payload.gravatarEmail,
     };
-
+  case SCORE_SUM:
+    return {
+      ...state,
+      score: state.score + action.payload,
+    };
   default:
     return state;
   }

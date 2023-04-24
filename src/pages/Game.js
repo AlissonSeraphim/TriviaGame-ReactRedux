@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { scoreSum } from '../redux/actions';
+import { connect } from 'react-redux';
 
 class Game extends React.Component {
   state = {
@@ -104,6 +106,24 @@ class Game extends React.Component {
     }
   };
 
+  answerClick = (answer) => {
+    const { question, contador, timer } = this.state;
+    const { dispatch } = this.props;
+    if (question[contador].rightAnswer === answer) {
+      const calculateScore = (difficulty, secondsLeft) => {
+        const levels = {
+          easy: 1,
+          medium: 2,
+          hard: 3,
+        };
+        const correctAnswer = 10;
+        return correctAnswer + (levels[difficulty] * secondsLeft);
+      };
+      const TOTAL = calculateScore(question[contador].difficulty, timer);
+      dispatch(scoreSum(TOTAL));
+    }
+  };
+
   render() {
     const {
       rightAnswer,
@@ -152,6 +172,7 @@ class Game extends React.Component {
                   this.questions();
                   this.setTimerQuestion();
                   this.includesNext();
+                  this.answerClick();
                 } }
                 disabled={ timeout }
               >
@@ -180,4 +201,4 @@ Game.propTypes = {
   }),
 }.isRequired;
 
-export default Game;
+export default connect()(Game);
