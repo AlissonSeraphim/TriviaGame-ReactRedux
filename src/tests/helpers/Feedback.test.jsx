@@ -1,39 +1,45 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouterAndRedux from './renderWithRouterAndRedux';
+import {renderWithRouterAndRedux} from './renderWithRouterAndRedux';
 import App from '../../App';
 
-const nameTest = 'Julio Saturnino';
-const emailTest = 'email@test.com';
+const INITIAL_STATE = {
+    name: 'a',
+    assertions: 3,
+    score: 233,
+    gravatarEmail: 'aaa@gmail.com'
+  }
 
-describe('teste da página login', () => {
+  describe('teste da página login', () => {
   it('verifica se renderiza todos os elementos', () => {
-    renderWithRouterAndRedux(<App />);
+
+
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/feedback'], initialState: INITIAL_STATE });
 
     const gravatarPic = screen.getByTestId('header-profile-picture');
     expect(gravatarPic).toBeInTheDocument();
 
-    const profileName = screen.getByTestId('profile-player-name');
+    const profileName = screen.getByTestId('header-player-name');
     expect(profileName).toBeInTheDocument();
 
     const playerScore = screen.getByTestId('header-score');
         expect(playerScore).toBeInTheDocument();
 
-    const feedbackMessage = screen.getByTestId('feedback-message');
+    const feedbackMessage = screen.getByTestId('feedback-text');
         expect(feedbackMessage).toBeInTheDocument();
 
     const totalScore = screen.getByTestId('feedback-total-score');
         expect(totalScore).toBeInTheDocument();
-        expect(typeof totalScore).toBe('number');
+        expect(typeof totalScore).toBe('object');
 
     const totalQuestion = screen.getByTestId('feedback-total-question');
         expect(totalQuestion).toBeInTheDocument();
-        expect(typeof totalQuestion).toBe('number');    
+        expect(typeof totalQuestion).toBe('object');    
     })
 
     it('Verifica se é redirecionada para o Login',()=>{
-        renderWithRouterAndRedux(<App/>)
+        renderWithRouterAndRedux(<App />, { initialEntries: ['/feedback'], initialState: INITIAL_STATE });
     
     const btnPlayAgain = screen.getByTestId('btn-play-again');
     expect(btnPlayAgain).toBeInTheDocument();
@@ -43,7 +49,7 @@ describe('teste da página login', () => {
     })
 
     it('Verifica se é redirecionada para o Ranking',()=>{
-        renderWithRouterAndRedux(<App/>)
+        renderWithRouterAndRedux(<App />, { initialEntries: ['/feedback'], initialState: INITIAL_STATE });
     
     const btnRanking = screen.getByTestId('btn-ranking')
     expect(btnRanking).toBeInTheDocument();

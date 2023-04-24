@@ -75,6 +75,8 @@ class Game extends React.Component {
     this.setState({ categories: category[contador] });
     const questions = results.map((element) => element.question);
     this.setState({ question: questions[contador] });
+    console.log(contador);
+    console.log(questions);
     const incorrect = results.map((element) => element.incorrect_answers);
     const right = results.map((element) => element.correct_answer);
     this.setState({ rightAnswer: right[contador] });
@@ -109,7 +111,7 @@ class Game extends React.Component {
     const { contador } = this.state;
     const { history } = this.props;
 
-    const maxQuestionsAnswer = 5;
+    const maxQuestionsAnswer = 4;
 
     if (contador < maxQuestionsAnswer) {
       this.setState(
@@ -161,7 +163,7 @@ class Game extends React.Component {
       incorrectClass,
     } = this.state;
 
-    const { history } = this.props;
+    // const { history } = this.props;
 
     console.log(rightAnswer);
     console.log(question);
@@ -223,18 +225,6 @@ class Game extends React.Component {
               Next
             </button>
           )}
-          <button
-            data-testid="btn-play-again"
-            onClick={ () => history.push('/') }
-          >
-            Play Again
-          </button>
-          <button
-            data-testid="btn-ranking"
-            onClick={ () => history.push('/ranking') }
-          >
-            Ranking
-          </button>
         </div>
       </div>
     );
