@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { scoreSum } from '../redux/actions';
+import './Game.css';
 
 class Game extends React.Component {
   state = {
@@ -16,6 +17,8 @@ class Game extends React.Component {
     timeout: false,
     needNext: false,
     seconds: 30,
+    correctClass: '',
+    incorrectClass: '',
   };
 
   componentDidMount() {
@@ -65,11 +68,6 @@ class Game extends React.Component {
     }
   };
 
-  // refreshCounter = () => {
-  //   const { contador } = this.state;
-  //   this.setState({ contador: contador + 1 }, this.verifyNumberQuestions());
-  // };
-
   questions = () => {
     const { contador, results } = this.state;
     console.log(results);
@@ -97,6 +95,13 @@ class Game extends React.Component {
       allAnswers: array });
   };
 
+  changeColor = () => {
+    this.setState({
+      correctClass: 'correct',
+      incorrectClass: 'incorrect',
+    });
+  };
+
   verifyNumberQuestions = () => {
     const { contador } = this.state;
     const { history } = this.props;
@@ -106,7 +111,12 @@ class Game extends React.Component {
     if (contador < maxQuestionsAnswer) {
       this.setState(
         {
-          needNext: false, timeout: false, contador: contador + 1 },
+          needNext: false,
+          timeout: false,
+          contador: contador + 1,
+          correctClass: '',
+          incorrectClass: '',
+        },
         () => this.questions(),
       );
     }
@@ -136,7 +146,9 @@ class Game extends React.Component {
   };
 
   selectAnswer = () => {
-    this.setState({ needNext: true });
+    this.setState({
+      needNext: true,
+    });
   };
 
   render() {
@@ -149,6 +161,8 @@ class Game extends React.Component {
       timeout,
       seconds,
       contador,
+      correctClass,
+      incorrectClass,
     } = this.state;
 
     // const { history } = this.props;
@@ -163,7 +177,6 @@ class Game extends React.Component {
         <div>
           Countdown:
           {seconds}
-
         </div>
         <span data-testid="question-category">{categories}</span>
         <div>
@@ -173,12 +186,15 @@ class Game extends React.Component {
           {allAnswers.map((e, index) => (rightAnswer === e
             ? (
               <button
+                type="button"
+                className={ correctClass }
                 data-testid="correct-answer"
                 key={ index }
                 onClick={ () => {
                   this.setTimerQuestion();
-                  this.selectAnswer();
                   this.answerClick();
+                  this.selectAnswer();
+                  this.changeColor();
                 } }
                 disabled={ timeout }
               >
@@ -186,11 +202,14 @@ class Game extends React.Component {
               </button>)
             : (
               <button
+                type="button"
+                className={ incorrectClass }
                 data-testid={ `wrong-answer-${index}` }
                 key={ index }
                 onClick={ () => {
                   this.setTimerQuestion();
                   this.selectAnswer();
+                  this.changeColor();
                 } }
                 disabled={ timeout }
               >
@@ -215,9 +234,6 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }),
-}.isRequired;
+  history: PropTypes.shape({ push: PropTypes.func }) }.isRequired;
 
 export default connect()(Game);

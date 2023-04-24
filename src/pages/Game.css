@@ -1,0 +1,65 @@
+/* Será validado se a cor da alternativa correta é "rgb(6, 240, 15)" ao acertar a questão
+Será validado se a cor das alternativas incorretas é definida como "red" ao acertar a
+questão
+Será validado se a cor da alternativa correta é "rgb(6, 240, 15)" ao errar a questão
+Será validado se a cor das alternativas incorretas é definida como "red" ao errar a
+questão
+Utilize a propriedade css border com o valor 3px solid rgb(6, 240, 15) para a alternativa
+correta
+Utilize a propriedade css border com o valor 3px solid red para as alternativas
+incorretas. */
+
+body {
+  background-color: #3c11fc;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  padding: 0;
+  text-align: center;
+}
+
+span {
+  font-size: 40px;
+  line-height: 50px;
+}
+
+.description-category {
+  color: #7a5de2;
+  font-style: italic;
+}
+
+.description-question {
+  color: #b6b2ca;
+  width: 80%;
+}
+
+/* button {
+  background-color: rgb(184, 184, 184);
+  border-radius: 5px;
+  font-size: 20px;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: 20px;
+  text-align: center;
+} */
+
+/* .btn-correct-answer:active .btn-incorrect-answer {
+  background-color: rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.btn-incorrect-answer:active .btn-correct-answer {
+  background-color: red;
+  border: 3px solid red;
+} */
+
+.correct {
+  background-color: rgb(6, 240, 15);
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.incorrect {
+  background-color: red;
+  border: 3px solid red;
+}
+
