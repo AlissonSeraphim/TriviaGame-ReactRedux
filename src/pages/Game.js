@@ -95,16 +95,11 @@ class Game extends React.Component {
       allAnswers: array });
   };
 
-  // changeColor = (event) => {
-  // const { target } = event;
-  // if (target.id) {
   changeColor = () => {
-    console.log('rogerinho esteve aqui');
     this.setState({
       correctClass: 'correct',
       incorrectClass: 'incorrect',
     });
-    // }
   };
 
   verifyNumberQuestions = () => {
@@ -116,7 +111,12 @@ class Game extends React.Component {
     if (contador < maxQuestionsAnswer) {
       this.setState(
         {
-          needNext: false, timeout: false, contador: contador + 1 },
+          needNext: false,
+          timeout: false,
+          contador: contador + 1,
+          correctClass: '',
+          incorrectClass: '',
+        },
         () => this.questions(),
       );
     }
@@ -146,7 +146,9 @@ class Game extends React.Component {
   };
 
   selectAnswer = () => {
-    this.setState({ needNext: true });
+    this.setState({
+      needNext: true,
+    });
   };
 
   render() {
@@ -190,8 +192,8 @@ class Game extends React.Component {
                 key={ index }
                 onClick={ () => {
                   this.setTimerQuestion();
-                  this.selectAnswer();
                   this.answerClick();
+                  this.selectAnswer();
                   this.changeColor();
                 } }
                 disabled={ timeout }
@@ -232,9 +234,6 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }),
-}.isRequired;
+  history: PropTypes.shape({ push: PropTypes.func }) }.isRequired;
 
 export default connect()(Game);
