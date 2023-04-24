@@ -27,7 +27,7 @@ class Feedback extends React.Component {
     const { assertions, score } = this.props;
     return (
       <div>
-        <h1>feedback page</h1>
+        <h1 data-testid="feedback-text">feedback page</h1>
         <Header />
         <div data-testid="feedback-text">{ feedbackMessage }</div>
         <div data-testid="feedback-total-score">{ score }</div>
