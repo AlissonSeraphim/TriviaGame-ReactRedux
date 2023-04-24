@@ -30,7 +30,6 @@ class Game extends React.Component {
         this.setState({ seconds: seconds - 1 });
       }
       if (seconds === 0) {
-        console.log('h');
         clearInterval(timer);
         this.setState({ timeout: true });
       }
@@ -51,7 +50,6 @@ class Game extends React.Component {
     const { history } = this.props;
     const { token } = this.state;
     try {
-      console.log('b');
       const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`);
       const data = await response.json();
       const expiredError = 3;
@@ -67,13 +65,14 @@ class Game extends React.Component {
     }
   };
 
-  refreshCounter = () => {
-    const { contador } = this.state;
-    this.setState({ contador: contador + 1 });
-  };
+  // refreshCounter = () => {
+  //   const { contador } = this.state;
+  //   this.setState({ contador: contador + 1 }, this.verifyNumberQuestions());
+  // };
 
   questions = () => {
     const { contador, results } = this.state;
+    console.log(results);
     const category = results.map((element) => element.category);
     this.setState({ categories: category[contador] });
     const questions = results.map((element) => element.question);
@@ -85,7 +84,6 @@ class Game extends React.Component {
     allAnswers.push(...incorrect[contador]);
     allAnswers.push(right[contador]);
     this.shuffle(allAnswers);
-    this.refreshCounter();
   };
 
   shuffle = (array) => {
@@ -97,10 +95,6 @@ class Game extends React.Component {
       allAnswers: array });
   };
 
-  includesNext = () => {
-    this.setState({ needNext: true });
-  };
-
   verifyNumberQuestions = () => {
     const { contador } = this.state;
     const { history } = this.props;
@@ -108,7 +102,8 @@ class Game extends React.Component {
     const maxQuestionsAnswer = 5;
 
     if (contador < maxQuestionsAnswer) {
-      this.questions();
+      this.setState({
+        needNext: false, timeout: false, contador: contador + 1 }, this.questions());
     }
 
     if (contador === maxQuestionsAnswer) {
@@ -126,13 +121,17 @@ class Game extends React.Component {
         hard: 3,
       };
       const correctAnswer = 10;
-      console.log(secondsLeft);
       return (
         correctAnswer + (levels[difficulty] * (secondsLeft))
       );
     };
+    console.log('sou a dificuldade:', results[contador].difficulty);
     const TOTAL = calculateScore(results[contador].difficulty, seconds);
     dispatch(scoreSum(TOTAL));
+  };
+
+  selectAnswer = () => {
+    this.setState({ needNext: true });
   };
 
   render() {
@@ -144,12 +143,14 @@ class Game extends React.Component {
       needNext,
       timeout,
       seconds,
+      contador,
     } = this.state;
 
     const { history } = this.props;
 
     console.log(rightAnswer);
     console.log(question);
+    console.log(contador);
 
     return (
       <div>
@@ -170,9 +171,8 @@ class Game extends React.Component {
                 data-testid="correct-answer"
                 key={ index }
                 onClick={ () => {
-                  this.questions();
                   this.setTimerQuestion();
-                  this.includesNext();
+                  this.selectAnswer();
                   this.answerClick();
                 } }
                 disabled={ timeout }
@@ -184,9 +184,8 @@ class Game extends React.Component {
                 data-testid={ `wrong-answer-${index}` }
                 key={ index }
                 onClick={ () => {
-                  this.questions();
                   this.setTimerQuestion();
-                  this.includesNext();
+                  this.selectAnswer();
                 } }
                 disabled={ timeout }
               >
@@ -197,11 +196,11 @@ class Game extends React.Component {
             <button
               data-testid="btn-next"
               onClick={ () => {
-                this.verifyNumberQuestions();
                 this.setTimerQuestion();
+                this.verifyNumberQuestions();
               } }
             >
-              Next Button
+              Next
             </button>
           )}
           <button
