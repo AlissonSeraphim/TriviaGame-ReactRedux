@@ -146,7 +146,7 @@ class Game extends React.Component {
       seconds,
     } = this.state;
 
-    const { history } = this.props;
+    // const { history } = this.props;
 
     console.log(rightAnswer);
     console.log(question);
@@ -204,18 +204,6 @@ class Game extends React.Component {
               Next Button
             </button>
           )}
-          <button
-            data-testid="btn-play-again"
-            onClick={ () => history.push('/') }
-          >
-            Play Again
-          </button>
-          <button
-            data-testid="btn-ranking"
-            onClick={ () => history.push('/ranking') }
-          >
-            Ranking
-          </button>
         </div>
       </div>
     );
