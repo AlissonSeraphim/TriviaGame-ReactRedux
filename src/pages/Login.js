@@ -51,11 +51,7 @@ class Login extends React.Component {
     try {
       const response = await fetch(BASE_URL);
       const data = await response.json();
-
-      console.log(data.token);
-
       localStorage.setItem('token', data.token);
-      console.log('a');
       history.push('/game');
     } catch (error) {
       console.log('There was an error', error);
