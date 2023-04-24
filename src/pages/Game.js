@@ -205,6 +205,12 @@ class Game extends React.Component {
             </button>
           )}
           <button
+            data-testid="btn-play-again"
+            onClick={ () => history.push('/') }
+          >
+            Play Again
+          </button>
+          <button
             data-testid="btn-ranking"
             onClick={ () => history.push('/ranking') }
           >
