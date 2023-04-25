@@ -9,8 +9,18 @@ correta
 Utilize a propriedade css border com o valor 3px solid red para as alternativas
 incorretas. */
 
-body {
+/* body {
   background-color: #3c11fc;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  padding: 0;
+  text-align: center;
+} */
+
+body {
+
+  /* background-color: #3c11fc; */
   margin-left: auto;
   margin-right: auto;
   max-width: 90%;
@@ -33,25 +43,24 @@ span {
   width: 80%;
 }
 
-/* button {
+button {
   background-color: rgb(184, 184, 184);
+  border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
   border-radius: 5px;
-  font-size: 20px;
-  height: 40px;
+  border-style: solid;
+  border-width: 20px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  height: auto;
   margin-right: 10px;
   margin-top: 20px;
+  position: relative;
   text-align: center;
-} */
-
-/* .btn-correct-answer:active .btn-incorrect-answer {
-  background-color: rgb(6, 240, 15);
-  border: 3px solid rgb(6, 240, 15);
+  text-transform: uppercase;
+  user-select: none;
 }
-
-.btn-incorrect-answer:active .btn-correct-answer {
-  background-color: red;
-  border: 3px solid red;
-} */
 
 .correct {
   background-color: rgb(6, 240, 15);
@@ -62,4 +71,3 @@ span {
   background-color: red;
   border: 3px solid red;
 }
-

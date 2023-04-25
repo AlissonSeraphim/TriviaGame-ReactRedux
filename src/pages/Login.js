@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Loading from '../components/Loading';
 import { userInfo } from '../redux/actions';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
@@ -70,8 +71,8 @@ class Login extends React.Component {
     // const { dispatch } = this.props;
 
     return (
-      <div>
-        <h1>Trivia</h1>
+      <div className="containerLogin">
+        <h1>Trivia Trybe Game</h1>
         <form onSubmit={ this.handleSubmit }>
           <div>
             <label>
