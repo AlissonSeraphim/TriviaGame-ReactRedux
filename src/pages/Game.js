@@ -52,13 +52,28 @@ class Game extends React.Component {
     try {
       const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`);
       const data = await response.json();
+      const entities = {
+        '&#039;': '\'',
+        '&quot;': '"',
+        '&ntilde;': 'ñ',
+        '&eacute;': 'é',
+        '&amp;': '&',
+        '&uuml;': 'ü',
+      };
+      const replaced = data.results.map((element) => {
+        const question = element.question.replace(/&#?\w+;/g, (match) => entities[match] || match);
+        const correct = element.correct_answer.replace(/&#?\w+;/g, (match) => entities[match] || match);
+        const incorrect = element.incorrect_answers.map((elementTwo) => elementTwo.replace(/&#?\w+;/g, (match) => entities[match] || match));
+        return { ...element, question, correct, incorrect };
+      });
+      // console.log(pitems);
       const expiredError = 3;
       if (data.response_code === expiredError) {
         localStorage.removeItem(token);
         history.push('/');
       }
       this.setState({
-        results: data.results,
+        results: replaced,
       }, () => this.questions(), this.setTimer());
     } catch (error) {
       console.log('There was an error', error);
