@@ -9,7 +9,7 @@ class Game extends React.Component {
   state = {
     token: '',
     results: [],
-    contador: 0,
+    counter: 0,
     categories: [],
     question: '',
     rightAnswer: '',
@@ -69,20 +69,17 @@ class Game extends React.Component {
   };
 
   questions = () => {
-    const { contador, results } = this.state;
-    console.log(results);
+    const { counter, results } = this.state;
     const category = results.map((element) => element.category);
-    this.setState({ categories: category[contador] });
+    this.setState({ categories: category[counter] });
     const questions = results.map((element) => element.question);
-    this.setState({ question: questions[contador] });
-    console.log(contador);
-    console.log(questions);
+    this.setState({ question: questions[counter] });
     const incorrect = results.map((element) => element.incorrect_answers);
     const right = results.map((element) => element.correct_answer);
-    this.setState({ rightAnswer: right[contador] });
+    this.setState({ rightAnswer: right[counter] });
     const allAnswers = [];
-    allAnswers.push(...incorrect[contador]);
-    allAnswers.push(right[contador]);
+    allAnswers.push(...incorrect[counter]);
+    allAnswers.push(right[counter]);
     this.shuffle(allAnswers);
   };
 
@@ -103,17 +100,17 @@ class Game extends React.Component {
   };
 
   verifyNumberQuestions = () => {
-    const { contador } = this.state;
+    const { counter } = this.state;
     const { history } = this.props;
 
     const maxQuestionsAnswer = 4;
 
-    if (contador < maxQuestionsAnswer) {
+    if (counter < maxQuestionsAnswer) {
       this.setState(
         {
           needNext: false,
           timeout: false,
-          contador: contador + 1,
+          counter: counter + 1,
           correctClass: '',
           incorrectClass: '',
         },
@@ -121,13 +118,13 @@ class Game extends React.Component {
       );
     }
 
-    if (contador === maxQuestionsAnswer) {
+    if (counter === maxQuestionsAnswer) {
       history.push('/feedback');
     }
   };
 
   answerClick = () => {
-    const { contador, seconds, results } = this.state;
+    const { counter, seconds, results } = this.state;
     const { dispatch } = this.props;
     const calculateScore = (difficulty, secondsLeft) => {
       const levels = {
@@ -140,8 +137,7 @@ class Game extends React.Component {
         correctAnswer + (levels[difficulty] * (secondsLeft))
       );
     };
-    console.log('sou a dificuldade:', results[contador].difficulty);
-    const TOTAL = calculateScore(results[contador].difficulty, seconds);
+    const TOTAL = calculateScore(results[counter].difficulty, seconds);
     dispatch(scoreSum(TOTAL));
   };
 
@@ -160,16 +156,11 @@ class Game extends React.Component {
       needNext,
       timeout,
       seconds,
-      contador,
       correctClass,
       incorrectClass,
     } = this.state;
 
     // const { history } = this.props;
-
-    console.log(rightAnswer);
-    console.log(question);
-    console.log(contador);
 
     return (
       <div>
