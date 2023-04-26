@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Loading from '../components/Loading';
 import { userInfo } from '../redux/actions';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
@@ -70,8 +71,16 @@ class Login extends React.Component {
     // const { dispatch } = this.props;
 
     return (
-      <div>
-        <h1>Trivia</h1>
+      <div className="bg">
+        {/* <audio controls>
+          <track kind="captions" />
+          <source
+            src="src/sound/Super Furious Funkified Foxtrot.mp3"
+            type="audio/mp3"
+            autoPlay
+          />
+        </audio> */}
+        <h1>Big Corn Show</h1>
         <form onSubmit={ this.handleSubmit }>
           <div>
             <label>
@@ -89,6 +98,7 @@ class Login extends React.Component {
             <label>
               Nome:
               <input
+                className="input-name"
                 type="text"
                 name="userInput"
                 placeholder="Aderbaldo pereira"

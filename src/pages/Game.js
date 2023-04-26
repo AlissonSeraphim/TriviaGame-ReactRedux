@@ -178,7 +178,7 @@ class Game extends React.Component {
     // const { history } = this.props;
 
     return (
-      <div>
+      <div className="container">
         <Header />
         <div>
           Countdown:

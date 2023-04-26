@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Press Start 2P' , cursive;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100vw;
+}
+
+h1 {
+  color: white;
+  font-size: 51px;
+  margin-top: 10%;
+}
+
+label {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 30px;
+  margin-left: 38%;
+  text-align: center;
+}
+
+input {
+  font-family: 'Press Start 2P' , cursive;
+  font-size: 10px;
+  line-height: 20px;
+  margin-left: 5px;
+  padding: 1px;
+  width: 230px;
+}
+
+.input-name {
+  width: 246px;
+}

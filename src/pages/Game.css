@@ -1,26 +1,34 @@
-/* Será validado se a cor da alternativa correta é "rgb(6, 240, 15)" ao acertar a questão
-Será validado se a cor das alternativas incorretas é definida como "red" ao acertar a
-questão
-Será validado se a cor da alternativa correta é "rgb(6, 240, 15)" ao errar a questão
-Será validado se a cor das alternativas incorretas é definida como "red" ao errar a
-questão
-Utilize a propriedade css border com o valor 3px solid rgb(6, 240, 15) para a alternativa
-correta
-Utilize a propriedade css border com o valor 3px solid red para as alternativas
-incorretas. */
-
 body {
-  background-color: #3c11fc;
-  margin-left: auto;
+  background-image: url('../images/Tela-de-login-background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Press Start 2P' , cursive;
+  height: 100vh;
+  margin: 0;
+  margin-left: 0;
   margin-right: auto;
   max-width: 90%;
   padding: 0;
+  position: relative;
   text-align: center;
+  width: 100vw;
+}
+
+.container {
+  background: linear-gradient(90deg, #42114d 0%, #650c7f 52%, #8d10b3 100%);
+  border: 5px solid goldenrod;
+  line-height: 30px;
+  margin-left: 28.5%;
+  margin-top: 8%;
+  max-height: 370px;
+  padding: 5px;
+  width: 700px;
 }
 
 span {
-  font-size: 40px;
-  line-height: 50px;
+  font-size: 18px;
+  line-height: 20px;
+  margin-top: 5px;
 }
 
 .description-category {
@@ -33,25 +41,23 @@ span {
   width: 80%;
 }
 
-/* button {
-  background-color: rgb(184, 184, 184);
+button {
+  background-color: hsl(286, 84%, 38%);
   border-radius: 5px;
-  font-size: 20px;
-  height: 40px;
+  border-style: solid;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Press Start 2P' , cursive;
+  font-size: 15px;
+  height: auto;
   margin-right: 10px;
   margin-top: 20px;
+  position: relative;
   text-align: center;
-} */
-
-/* .btn-correct-answer:active .btn-incorrect-answer {
-  background-color: rgb(6, 240, 15);
-  border: 3px solid rgb(6, 240, 15);
+  text-transform: uppercase;
+  user-select: none;
 }
-
-.btn-incorrect-answer:active .btn-correct-answer {
-  background-color: red;
-  border: 3px solid red;
-} */
 
 .correct {
   background-color: rgb(6, 240, 15);
@@ -62,4 +68,3 @@ span {
   background-color: red;
   border: 3px solid red;
 }
-
