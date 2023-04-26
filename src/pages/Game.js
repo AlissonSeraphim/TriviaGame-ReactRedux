@@ -172,7 +172,7 @@ class Game extends React.Component {
     console.log(contador);
 
     return (
-      <div>
+      <div className="container">
         <Header />
         <div>
           Countdown:
