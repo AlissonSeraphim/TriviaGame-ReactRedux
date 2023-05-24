@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/TriviaGame-ReactRedux/static/css/main.65b274f6.css",
-    "main.js": "/TriviaGame-ReactRedux/static/js/main.c3335cf4.js",
+    "main.js": "/TriviaGame-ReactRedux/static/js/main.41ae2bed.js",
     "static/media/Tela-de-login-background.png": "/TriviaGame-ReactRedux/static/media/Tela-de-login-background.5f17b885ed1d1d484989.png",
     "index.html": "/TriviaGame-ReactRedux/index.html",
     "main.65b274f6.css.map": "/TriviaGame-ReactRedux/static/css/main.65b274f6.css.map",
-    "main.c3335cf4.js.map": "/TriviaGame-ReactRedux/static/js/main.c3335cf4.js.map"
+    "main.41ae2bed.js.map": "/TriviaGame-ReactRedux/static/js/main.41ae2bed.js.map"
   },
   "entrypoints": [
     "static/css/main.65b274f6.css",
-    "static/js/main.c3335cf4.js"
+    "static/js/main.41ae2bed.js"
   ]
 }
