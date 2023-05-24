@@ -28,6 +28,10 @@ Para começar com o projeto, siga estes passos:
 3. Inicie a aplicação com `npm start`.
 4. Acesse o aplicativo em seu navegador em `http://localhost:3000`.
 
+## Acessando a Aplicação
+
+Você pode acessar a aplicação Trivia Game por meio do seguinte link: [https://alissonseraphim.github.io/TriviaGame-ReactRedux/]
+
 ## Testes
 
 O projeto inclui testes abrangentes utilizando a biblioteca React Testing Library para garantir uma boa cobertura de testes. Para executar os testes, utilize o comando `npm test`.
@@ -73,6 +77,10 @@ To get started with the project, follow these steps:
 2. Install dependencies by running `npm install`.
 3. Start the application with `npm start`.
 4. Access the app in your browser at `http://localhost:3000`.
+
+## Accessing the Application
+
+You can access the Trivia Game application through the following link: [https://alissonseraphim.github.io/TriviaGame-ReactRedux/]
 
 ## Testing
 
