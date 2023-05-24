@@ -1,6 +1,6 @@
 # [PT-BR] Jogo de Trivia - React e Redux
 
-Este projeto é um jogo de Trivia baseado no popular jogo "Trivia" (semelhante ao "Show do Milhão"), desenvolvido pelos desenvolvedores Alisson Tassi, Katia Nienow, Artur Rangel, Guilherme Libanori e Amanda Rodrigues. O jogo é construído utilizando React e Redux para gerenciamento de estado, com funcionalidades desenvolvidas em grupo de acordo com as demandas definidas em um quadro Kanban. Confira o canal do Slack para acessar o quadro!
+Este projeto é um jogo de Trivia baseado no popular jogo "Trivia" (semelhante ao "Show do Milhão"), desenvolvido pelos desenvolvedores Alisson Tassi, Katia Nienow, Artur Rangel, Guilherme Libanori e Amanda Rodrigues. O jogo é construído utilizando React e Redux para gerenciamento de estado, com funcionalidades desenvolvidas em grupo de acordo com as demandas definidas em um quadro Kanban.
 
 ## Funcionalidades
 
@@ -46,7 +46,7 @@ Este projeto não possui uma licença específica, pois foi desenvolvido para ex
 
 # [EN] Trivia Game - React and Redux
 
-This project is a Trivia game based on the popular "Trivia" game (similar to "Who Wants to Be a Millionaire"), developed by the developers Alisson Tassi, Katia Nienow, Artur Rangel, Guilherme Libanori, and Amanda Rodrigues. The game is built using React and Redux for state management, with functionalities developed collaboratively based on the defined requirements on a Kanban board. Check the Slack channel for access to the board!
+This project is a Trivia game based on the popular "Trivia" game (similar to "Who Wants to Be a Millionaire"), developed by the developers Alisson Tassi, Katia Nienow, Artur Rangel, Guilherme Libanori, and Amanda Rodrigues. The game is built using React and Redux for state management, with functionalities developed collaboratively based on the defined requirements on a Kanban board.
 
 ## Features
 
